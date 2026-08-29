@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A0E27">
+<title>PowerHouse Fitness — Gachibowli, Hyderabad | Premium Gym & Training</title>
+<meta name="description" content="Hyderabad's most premium fitness destination in Gachibowli. HIIT, functional training, boxing, Zumba, strength coaching. QR check-in, member app, real results.">
+
+<!-- CONFIG: Change these values to rebrand for any gym -->
+<script>
+window.GYM_CONFIG = {
+  name: "PowerHouse Fitness",
+  tagline: "Forge Your Strongest Self",
+  location: "Gachibowli, Hyderabad",
+  address: "2nd Floor, DLF Cyber City, Gachibowli, Hyderabad, 500032",
+  phone: "+919876543210",
+  whatsapp: "919876543210",
+  email: "raj@powerhouse.fitness",
+  hours: "5:00 AM – 11:00 PM",
+  primary: "#E63946",
+  accent: "#F77F00",
+  bg: "#0A0E27",
+  instagram: "https://instagram.com/powerhousefitnesshyd",
+  facebook: "https://facebook.com/powerhousefitnesshyd",
+  gym_id: "gym_powerhouse",
+  apiBase: "https://base44.app/api/apps/6a700b150c8d8b8e923580a1/functions"
+};
+</script>
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0A0E27; --primary:#E63946; --accent:#F77F00;
+  --text:#fff; --text-muted:rgba(255,255,255,0.6); --text-dim:rgba(255,255,255,0.4);
+  --surface:rgba(255,255,255,0.05); --surface-hover:rgba(255,255,255,0.08);
+  --border:rgba(255,255,255,0.1); --radius:16px;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6}
+img{max-width:100%;display:block} a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+section{padding:100px 20px;position:relative} .container{max-width:1200px;margin:0 auto}
+.gradient-text{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* NAVBAR */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 20px;transition:all .3s ease}
+.nav.scrolled{background:rgba(10,14,39,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px 20px}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
+.nav-logo .dot{width:10px;height:10px;border-radius:50%;background:var(--primary);box-shadow:0 0 20px var(--primary)}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:14px;font-weight:500;color:var(--text-muted);transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{padding:10px 24px;background:var(--primary);border-radius:100px;font-size:14px;font-weight:600;transition:transform .2s,box-shadow .2s}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(230,57,70,0.4)}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.nav-burger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:.3s}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 20px 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top,rgba(230,57,70,0.15),transparent 50%),radial-gradient(ellipse at bottom right,rgba(247,127,0,0.1),transparent 50%);pointer-events:none}
+.hero-content{position:relative;z-index:1;max-width:800px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:100px;background:var(--surface);border:1px solid var(--border);font-size:13px;font-weight:500;color:var(--text-muted);margin-bottom:24px;animation:fadeInUp .8s ease}
+.hero-badge .pulse{width:8px;height:8px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
+.hero h1{font-size:clamp(40px,8vw,80px);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:20px;animation:fadeInUp .8s ease .1s both}
+.hero p{font-size:clamp(16px,3vw,20px);color:var(--text-muted);max-width:600px;margin:0 auto 40px;animation:fadeInUp .8s ease .2s both}
+.hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:fadeInUp .8s ease .3s both}
+.btn{padding:16px 36px;border-radius:100px;font-size:15px;font-weight:600;transition:all .3s ease;display:inline-flex;align-items:center;gap:10px}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(230,57,70,0.5)}
+.btn-ghost{background:var(--surface);border:1px solid var(--border);color:var(--text)}
+.btn-ghost:hover{background:var(--surface-hover);border-color:var(--primary)}
+.hero-stats{display:flex;gap:48px;justify-content:center;margin-top:60px;flex-wrap:wrap;animation:fadeInUp .8s ease .4s both}
+.hero-stat{text-align:center}
+.hero-stat .num{font-size:36px;font-weight:900;color:var(--text);font-variant-numeric:tabular-nums}
+.hero-stat .label{font-size:13px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+
+/* SECTIONS */
+.section-label{font-size:13px;font-weight:600;color:var(--primary);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
+.section-title{font-size:clamp(28px,5vw,48px);font-weight:800;letter-spacing:-1px;margin-bottom:16px;line-height:1.1}
+.section-sub{font-size:17px;color:var(--text-muted);max-width:600px;margin-bottom:48px}
+
+/* FEATURES */
+.features{background:rgba(0,0,0,0.3)}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.feature-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;transition:all .3s;position:relative;overflow:hidden}
+.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.feature-card:hover{transform:translateY(-8px);border-color:var(--primary);background:var(--surface-hover)}
+.feature-card:hover::before{transform:scaleX(1)}
+.feature-icon{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,rgba(230,57,70,0.15),rgba(247,127,0,0.1));display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:24px}
+.feature-card h3{font-size:20px;font-weight:700;margin-bottom:10px}
+.feature-card p{font-size:15px;color:var(--text-muted);line-height:1.6}
+
+/* CLASSES */
+.classes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.class-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .3s}
+.class-card:hover{transform:translateY(-6px);border-color:var(--accent)}
+.class-card-header{padding:24px;background:linear-gradient(135deg,rgba(230,57,70,0.1),rgba(247,127,0,0.05));border-bottom:1px solid var(--border)}
+.class-card-header h3{font-size:18px;font-weight:700;margin-bottom:6px}
+.class-card-header .trainer{font-size:13px;color:var(--text-dim)}
+.class-card-body{padding:20px 24px}
+.class-card-body .row{display:flex;justify-content:space-between;padding:8px 0;font-size:14px}
+.class-card-body .row .label{color:var(--text-dim)}
+.class-card-body .row .value{font-weight:600}
+.capacity-bar{height:6px;background:rgba(255,255,255,0.1);border-radius:100px;margin-top:12px;overflow:hidden}
+.capacity-bar .fill{height:100%;border-radius:100px;transition:width 1s ease}
+.class-urgent{display:inline-block;margin-top:12px;padding:4px 12px;border-radius:100px;font-size:11px;font-weight:600;background:rgba(230,57,70,0.2);color:var(--primary)}
+
+/* TRAINERS */
+.trainers{background:rgba(0,0,0,0.3)}
+.trainers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+.trainer-card{text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px 24px;transition:all .3s}
+.trainer-card:hover{transform:translateY(-6px);border-color:var(--primary)}
+.trainer-avatar{width:100px;height:100px;border-radius:50%;margin:0 auto 16px;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:800;color:#fff}
+.trainer-card h3{font-size:18px;font-weight:700;margin-bottom:4px}
+.trainer-card .specialty{font-size:13px;color:var(--accent);font-weight:500;margin-bottom:12px}
+.trainer-card .bio{font-size:14px;color:var(--text-muted)}
+.trainer-rating{color:var(--accent);font-size:14px;margin-top:12px}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:1000px;margin:0 auto}
+.price-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:36px 28px;position:relative;transition:all .3s}
+.price-card:hover{transform:translateY(-8px)}
+.price-card.featured{border-color:var(--primary);background:linear-gradient(135deg,rgba(230,57,70,0.08),rgba(247,127,0,0.03))}
+.price-card.featured::before{content:'MOST POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:6px 20px;background:var(--primary);border-radius:100px;font-size:11px;font-weight:700;letter-spacing:1px;white-space:nowrap}
+.price-card .plan{font-size:14px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px}
+.price-card .price{font-size:42px;font-weight:900;margin:12px 0 4px}
+.price-card .period{font-size:14px;color:var(--text-dim);margin-bottom:24px}
+.price-card ul{list-style:none;margin-bottom:28px}
+.price-card ul li{padding:10px 0;font-size:14px;color:var(--text-muted);display:flex;align-items:center;gap:10px}
+.price-card ul li::before{content:'✓';color:#22c55e;font-weight:700;flex-shrink:0}
+.price-card .btn{width:100%;justify-content:center}
+
+/* TESTIMONIALS */
+.testimonials{background:rgba(0,0,0,0.3)}
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.testimonial-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px}
+.testimonial-card .stars{color:var(--accent);font-size:16px;margin-bottom:12px}
+.testimonial-card .quote{font-size:15px;color:var(--text-muted);line-height:1.7;margin-bottom:16px}
+.testimonial-card .author{display:flex;align-items:center;gap:12px}
+.testimonial-card .author-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px}
+.testimonial-card .author-name{font-size:14px;font-weight:600}
+.testimonial-card .author-meta{font-size:12px;color:var(--text-dim)}
+
+/* CTA / TRIAL FORM */
+.cta-section{padding:120px 20px;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(230,57,70,0.1),transparent 70%)}
+.cta-box{max-width:600px;margin:0 auto;position:relative;z-index:1}
+.cta-box h2{font-size:clamp(32px,6vw,56px);font-weight:900;letter-spacing:-2px;margin-bottom:16px}
+.cta-box p{font-size:18px;color:var(--text-muted);margin-bottom:40px}
+.trial-form{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:36px;text-align:left}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:13px;font-weight:500;color:var(--text-muted);margin-bottom:6px}
+.form-input,.form-select{width:100%;padding:14px 16px;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:15px;font-family:inherit;transition:all .2s}
+.form-input:focus,.form-select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(230,57,70,0.1)}
+.form-input::placeholder{color:var(--text-dim)}
+.form-consent{display:flex;align-items:flex-start;gap:10px;margin:16px 0}
+.form-consent input[type="checkbox"]{margin-top:3px;accent-color:var(--primary)}
+.form-consent label{font-size:13px;color:var(--text-dim);line-height:1.5}
+.form-submit{width:100%;padding:16px;background:var(--primary);color:#fff;border-radius:12px;font-size:16px;font-weight:700;transition:all .3s;margin-top:8px}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(230,57,70,0.4)}
+.form-success{display:none;padding:24px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:12px;text-align:center;margin-top:16px}
+.form-success.show{display:block;animation:fadeInUp .4s ease}
+.form-success h3{color:#22c55e;font-size:18px;margin-bottom:8px}
+.form-success p{color:var(--text-muted);font-size:14px}
+.form-error{display:none;padding:14px;background:rgba(230,57,70,0.1);border:1px solid rgba(230,57,70,0.3);border-radius:12px;color:var(--primary);font-size:14px;margin-top:12px}
+.form-error.show{display:block}
+
+/* REFERRAL */
+.referral{background:linear-gradient(135deg,rgba(230,57,70,0.1),rgba(247,127,0,0.05));border:1px solid var(--border);border-radius:24px;padding:48px;text-align:center;max-width:700px;margin:0 auto}
+.referral h3{font-size:28px;font-weight:800;margin-bottom:12px}
+.referral p{font-size:16px;color:var(--text-muted);margin-bottom:24px}
+.referral-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px}
+.referral-step{text-align:center}
+.referral-step .num{width:40px;height:40px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-weight:700;font-size:16px}
+.referral-step p{font-size:13px;color:var(--text-muted)}
+
+/* FOOTER */
+.footer{padding:60px 20px 30px;border-top:1px solid var(--border);background:rgba(0,0,0,0.5)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;max-width:1200px;margin:0 auto}
+.footer-brand h3{font-size:20px;font-weight:800;margin-bottom:12px}
+.footer-brand p{font-size:14px;color:var(--text-dim);max-width:300px}
+.footer-col h4{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:16px}
+.footer-col a{display:block;font-size:14px;color:var(--text-dim);padding:4px 0;transition:color .2s}
+.footer-col a:hover{color:var(--text)}
+.footer-social{display:flex;gap:12px;margin-top:16px}
+.footer-social a{width:40px;height:40px;border-radius:12px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .2s}
+.footer-social a:hover{background:var(--primary);border-color:var(--primary)}
+.footer-bottom{max-width:1200px;margin:40px auto 0;padding-top:24px;border-top:1px solid var(--border);text-align:center;font-size:13px;color:var(--text-dim)}
+
+/* WHATSAPP FLOAT */
+.whatsapp-float{position:fixed;bottom:24px;right:24px;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(37,211,102,0.4);z-index:90;transition:transform .3s;animation:floatPulse 3s ease infinite}
+.whatsapp-float:hover{transform:scale(1.1)}
+@keyframes floatPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+/* ANIMATIONS */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(30px);transition:all .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-links.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:rgba(10,14,39,0.98);padding:20px;gap:16px;border-bottom:1px solid var(--border)}
+  .nav-burger{display:flex}
+  .hero-stats{gap:24px} .hero-stat .num{font-size:28px}
+  .form-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:24px}
+  .referral-steps{grid-template-columns:1fr;gap:16px}
+  .referral{padding:32px 20px}
+  section{padding:60px 20px}
+}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}.pricing-grid{grid-template-columns:1fr}.nav-logo{font-size:18px}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo"><span class="dot"></span><span>PowerHouse Fitness</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#features">Features</a><a href="#classes">Classes</a><a href="#trainers">Trainers</a>
+      <a href="#pricing">Pricing</a><a href="#testimonials">Reviews</a><a href="https://somilsharma2000.github.io/gym-os-frontend/" target="_blank" style="color:var(--primary)">Member Login →</a>
+      <a href="https://somilsharma2000.github.io/gym-os-frontend/" target="_blank" style="color:var(--primary);font-weight:600">Dashboard</a><a href="#trial" class="nav-cta">Free Trial</a>
+    </div>
+    <div class="nav-burger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><span class="pulse"></span><span>Now Open in Gachibowli, Hyderabad</span></div>
+    <h1>Forge Your<br><span class="gradient-text">Strongest Self</span></h1>
+    <p>Hyderabad's most premium fitness destination. 50+ weekly classes, world-class trainers, smart check-ins, and a community that pushes you further.</p>
+    <div class="hero-cta">
+      <a href="#trial" class="btn btn-primary">Book Free Trial →</a>
+      <a href="#classes" class="btn btn-ghost">View Classes</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num" data-count="847">0</div><div class="label">Active Members</div></div>
+      <div class="hero-stat"><div class="num" data-count="50">0</div><div class="label">Weekly Classes</div></div>
+      <div class="hero-stat"><div class="num" data-count="12">0</div><div class="label">Expert Trainers</div></div>
+      <div class="hero-stat"><div class="num" data-count="98">0</div><div class="label">% Satisfaction</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-label">Why PowerHouse</div>
+    <h2 class="section-title reveal">Everything you need to<br><span class="gradient-text">transform</span></h2>
+    <p class="section-sub reveal">From smart QR check-ins to personalized training plans — we've built the most advanced fitness experience in Hyderabad.</p>
+    <div class="features-grid">
+      <div class="feature-card reveal"><div class="feature-icon">📱</div><h3>Smart QR Check-In</h3><p>Walk in, scan your QR code, and you're training. No queues, no paperwork. Track every visit automatically.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">💪</div><h3>Expert Trainers</h3><p>Certified coaches with real experience. Personalized workout plans tailored to your body, your goals, your schedule.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">🔥</div><h3>50+ Weekly Classes</h3><p>HIIT, functional training, boxing, Zumba, strength, yoga — something for every day, every mood, every level.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">📊</div><h3>Member App</h3><p>Track your progress, book classes, manage your membership, and watch your streaks grow — all from your phone.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">🥗</div><h3>Diet Plans</h3><p>Custom nutrition plans built by experts. Because what you eat matters as much as how you train.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">⚡</div><h3>Automated Reminders</h3><p>WhatsApp reminders for classes, renewals, and payments. We keep you on track so you never miss a session.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="classes">
+  <div class="container">
+    <div class="section-label">Class Schedule</div>
+    <h2 class="section-title reveal">Find your<br><span class="gradient-text">perfect workout</span></h2>
+    <p class="section-sub reveal">Live class schedule with real-time capacity. Book early — popular classes fill up fast.</p>
+    <div class="classes-grid" id="classesGrid"><div style="text-align:center;padding:40px;color:var(--text-dim);grid-column:1/-1">Loading live class schedule...</div></div>
+  </div>
+</section>
+
+<section class="trainers" id="trainers">
+  <div class="container">
+    <div class="section-label">Meet the Team</div>
+    <h2 class="section-title reveal">Coaches who<br><span class="gradient-text">actually care</span></h2>
+    <p class="section-sub reveal">Our trainers aren't just certified — they're invested in your transformation.</p>
+    <div class="trainers-grid">
+      <div class="trainer-card reveal"><div class="trainer-avatar">A</div><h3>Arjun Reddy</h3><p class="specialty">Strength & Conditioning</p><p class="bio">10+ years training athletes. Former state-level powerlifter.</p><div class="trainer-rating">★★★★★</div></div>
+      <div class="trainer-card reveal"><div class="trainer-avatar">P</div><h3>Priya Sharma</h3><p class="specialty">HIIT & Functional Training</p><p class="bio">CrossFit Level 2 certified. Specialty in fat loss transformations.</p><div class="trainer-rating">★★★★★</div></div>
+      <div class="trainer-card reveal"><div class="trainer-avatar">K</div><h3>Karthik Verma</h3><p class="specialty">Boxing & MMA</p><p class="bio">National-level boxer. Trains beginners to competitive fighters.</p><div class="trainer-rating">★★★★★</div></div>
+      <div class="trainer-card reveal"><div class="trainer-avatar">S</div><h3>Sneha Iyer</h3><p class="specialty">Zumba & Dance Fitness</p><p class="bio">Bollywood + Latin fusion. Makes cardio feel like a party.</p><div class="trainer-rating">★★★★☆</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="container">
+    <div class="section-label">Membership</div>
+    <h2 class="section-title reveal" style="text-align:center">Plans that<br><span class="gradient-text">work for you</span></h2>
+    <p class="section-sub reveal" style="text-align:center;margin-left:auto;margin-right:auto">No hidden fees. No lock-in contracts. Just results.</p>
+    <div class="pricing-grid">
+      <div class="price-card reveal"><div class="plan">Starter</div><div class="price">₹2,999</div><div class="period">per month</div><ul><li>Full gym access</li><li>2 group classes/week</li><li>QR check-in</li><li>Member app</li><li>Locker facility</li></ul><a href="#trial" class="btn btn-ghost">Start Free Trial</a></div>
+      <div class="price-card featured reveal"><div class="plan">Standard</div><div class="price">₹4,999</div><div class="period">per month</div><ul><li>Everything in Starter</li><li>Unlimited group classes</li><li>1 PT session/month</li><li>Custom diet plan</li><li>Body composition analysis</li><li>Guest passes (2/month)</li></ul><a href="#trial" class="btn btn-primary">Start Free Trial</a></div>
+      <div class="price-card reveal"><div class="plan">Premium</div><div class="price">₹7,999</div><div class="period">per month</div><ul><li>Everything in Standard</li><li>4 PT sessions</li><li>Priority class booking</li><li>Monthly progress review</li><li>Unlimited guest passes</li><li>Recovery & spa access</li></ul><a href="#trial" class="btn btn-ghost">Start Free Trial</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-label">Real Results</div>
+    <h2 class="section-title reveal">Members who<br><span class="gradient-text">transformed</span></h2>
+    <p class="section-sub reveal">Don't take our word for it — hear from the people who walked in and never looked back.</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p class="quote">"Lost 12kg in 4 months. The trainers actually push you — not just during sessions, but they follow up on WhatsApp. Never seen that at any gym."</p><div class="author"><div class="author-avatar">R</div><div><div class="author-name">Ravi Teja</div><div class="author-meta">Software Engineer · Gachibowli</div></div></div></div>
+      <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p class="quote">"The QR check-in is so smooth. I scan, walk in, start my workout. No front desk queues. And the class booking system shows real-time capacity — game changer."</p><div class="author"><div class="author-avatar">S</div><div><div class="author-name">Sravya Reddy</div><div class="author-meta">Product Manager · Hitech City</div></div></div></div>
+      <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p class="quote">"I've been to 5 gyms in Hyderabad. This is the only one where the trainer remembers my name, my goals, and my last workout. The app keeps me accountable."</p><div class="author"><div class="author-avatar">M</div><div><div class="author-name">Mahesh Kumar</div><div class="author-meta">Business Owner · Kondapur</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="referral">
+  <div class="container"><div class="referral reveal">
+    <h3>Bring a friend, <span class="gradient-text">earn rewards</span></h3>
+    <p>Refer a friend and both of you get 1 month free when they join. No cap on referrals.</p>
+    <div class="referral-steps">
+      <div class="referral-step"><div class="num">1</div><p>Share your unique referral code from the member app</p></div>
+      <div class="referral-step"><div class="num">2</div><p>Friend joins with your code at the front desk</p></div>
+      <div class="referral-step"><div class="num">3</div><p>Both of you get 1 month free instantly</p></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="cta-section" id="trial">
+  <div class="cta-box">
+    <h2>Start your<br><span class="gradient-text">free trial</span> today</h2>
+    <p>One free session. No card required. No commitment. Just walk in and feel the difference.</p>
+    <form class="trial-form" id="trialForm">
+      <div class="form-row">
+        <div class="form-group"><label>Full Name *</label><input class="form-input" type="text" name="name" placeholder="Your name" required></div>
+        <div class="form-group"><label>Phone Number *</label><input class="form-input" type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required></div>
+      </div>
+      <div class="form-group"><label>Email</label><input class="form-input" type="email" name="email" placeholder="you@email.com"></div>
+      <div class="form-group"><label>What's your fitness goal? *</label><select class="form-select" name="goal" required><option value="">Select a goal...</option><option value="weight_loss">Weight Loss</option><option value="muscle_gain">Muscle Gain</option><option value="endurance">Endurance & Stamina</option><option value="general_fitness">General Fitness</option><option value="sports_training">Sports Training</option><option value="stress_relief">Stress Relief</option></select></div>
+      <div class="form-group"><label>When would you like to visit? *</label><select class="form-select" name="preferred_time" required><option value="">Select a time...</option><option value="morning">Morning (5 AM - 11 AM)</option><option value="afternoon">Afternoon (11 AM - 4 PM)</option><option value="evening">Evening (4 PM - 11 PM)</option><option value="weekend">Weekend</option></select></div>
+      <div class="form-consent"><input type="checkbox" id="consent" required><label for="consent">I consent to being contacted by PowerHouse Fitness regarding my free trial. I agree to receive WhatsApp updates about my booking, classes, and offers. I can opt out anytime.</label></div>
+      <button type="submit" class="form-submit" id="submitBtn">Book My Free Trial →</button>
+      <div class="form-success" id="formSuccess"><h3>🎉 Trial Booked Successfully!</h3><p>We'll WhatsApp you shortly with your trial details and directions. See you at the gym!</p></div>
+      <div class="form-error" id="formError"></div>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand"><h3>⚡ PowerHouse Fitness</h3><p>Hyderabad's premium fitness destination. Smart training, real results, zero excuses.</p><div class="footer-social"><a href="#" onclick="event.preventDefault()">IG</a><a href="#" onclick="event.preventDefault()">FB</a><a href="#" onclick="event.preventDefault()">YT</a></div></div>
+    <div class="footer-col"><h4>Explore</h4><a href="#features">Features</a><a href="#classes">Classes</a><a href="#trainers">Trainers</a><a href="#pricing">Pricing</a></div>
+    <div class="footer-col"><h4>Visit Us</h4><a href="#hero">2nd Floor, DLF Cyber City</a><a href="#hero">Gachibowli, Hyderabad</a><a href="#hero">5:00 AM – 11:00 PM</a></div>
+    <div class="footer-col"><h4>Contact</h4><a href="#trial">Book Free Trial</a><a href="#" onclick="event.preventDefault()">DM us on Instagram</a><a href="#" onclick="event.preventDefault()">WhatsApp Us</a></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 PowerHouse Fitness · Powered by Gym OS · Built by Beyond Pixels</p></div>
+</footer>
+
+<a href="#" id="whatsappBtn" class="whatsapp-float" target="_blank">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+document.getElementById('whatsappBtn').href = `https://wa.me/${window.GYM_CONFIG.whatsapp}`;
+
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+const counters = document.querySelectorAll('[data-count]');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target, target = parseInt(el.dataset.count);
+      let current = 0;
+      const step = Math.ceil(target / 40);
+      const interval = setInterval(() => {
+        current += step;
+        if (current >= target) { current = target; clearInterval(interval); }
+        el.textContent = current.toLocaleString();
+      }, 25);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObserver.observe(c));
+
+async function loadClasses() {
+  try {
+    const res = await fetch(`${window.GYM_CONFIG.apiBase}/getClasses`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ gym_id: window.GYM_CONFIG.gym_id })
+    });
+    const data = await res.json();
+    if (data.success && data.classes && data.classes.length > 0) {
+      renderClasses(data.classes);
+    } else {
+      renderClassFallback();
+    }
+  } catch (err) { renderClassFallback(); }
+}
+
+function renderClasses(classes) {
+  const grid = document.getElementById('classesGrid');
+  grid.innerHTML = classes.slice(0, 8).map(c => {
+    const enrolled = c.enrolled || c.booked_count || 0;
+    const capacity = c.capacity || 20;
+    const pct = Math.round((enrolled / capacity) * 100);
+    const isFull = pct >= 100, isUrgent = pct >= 75 && !isFull;
+    const barColor = isFull ? '#ef4444' : isUrgent ? '#f77f00' : '#22c55e';
+    return `<div class="class-card reveal"><div class="class-card-header"><h3>${c.title||c.name||'Fitness Class'}</h3><div class="trainer">with ${c.trainer_name||'TBA'}</div></div><div class="class-card-body"><div class="row"><span class="label">Day</span><span class="value" style="text-transform:capitalize">${c.day_of_week||c.day||'—'}</span></div><div class="row"><span class="label">Time</span><span class="value">${c.start_time||c.time||'—'}</span></div><div class="row"><span class="label">Duration</span><span class="value">${c.duration_minutes||45} min</span></div><div class="row"><span class="label">Capacity</span><span class="value">${enrolled}/${capacity}</span></div><div class="capacity-bar"><div class="fill" style="width:${Math.min(pct,100)}%;background:${barColor}"></div></div>${isUrgent?`<div class="class-urgent">⚡ Only ${capacity-enrolled} spots left!</div>`:''}${isFull?`<div class="class-urgent" style="background:rgba(239,68,68,0.2);color:#ef4444">CLASS FULL</div>`:''}</div></div>`;
+  }).join('');
+  document.querySelectorAll('#classesGrid .reveal').forEach(el => observer.observe(el));
+}
+
+function renderClassFallback() {
+  const grid = document.getElementById('classesGrid');
+  const fallback = [
+    {name:'HIIT Blast',trainer:'Priya Sharma',day:'Mon/Wed/Fri',time:'6:00 AM',duration:45,enrolled:18,capacity:25},
+    {name:'Boxing Fundamentals',trainer:'Karthik Verma',day:'Tue/Thu',time:'7:00 AM',duration:60,enrolled:12,capacity:15},
+    {name:'Strength & Power',trainer:'Arjun Reddy',day:'Mon/Wed',time:'6:00 PM',duration:60,enrolled:20,capacity:20},
+    {name:'Zumba Dance Fitness',trainer:'Sneha Iyer',day:'Tue/Thu/Sat',time:'7:00 PM',duration:45,enrolled:22,capacity:30},
+    {name:'Functional Training',trainer:'Priya Sharma',day:'Mon-Fri',time:'7:00 AM',duration:45,enrolled:15,capacity:20},
+    {name:'Power Yoga',trainer:'Sneha Iyer',day:'Wed/Fri/Sun',time:'8:00 AM',duration:60,enrolled:10,capacity:20}
+  ];
+  grid.innerHTML = fallback.map(c => {
+    const pct = Math.round((c.enrolled / c.capacity) * 100);
+    const isFull = pct >= 100, isUrgent = pct >= 75 && !isFull;
+    const barColor = isFull ? '#ef4444' : isUrgent ? '#f77f00' : '#22c55e';
+    return `<div class="class-card reveal"><div class="class-card-header"><h3>${c.name}</h3><div class="trainer">with ${c.trainer}</div></div><div class="class-card-body"><div class="row"><span class="label">Day</span><span class="value">${c.day}</span></div><div class="row"><span class="label">Time</span><span class="value">${c.time}</span></div><div class="row"><span class="label">Duration</span><span class="value">${c.duration} min</span></div><div class="row"><span class="label">Capacity</span><span class="value">${c.enrolled}/${c.capacity}</span></div><div class="capacity-bar"><div class="fill" style="width:${pct}%;background:${barColor}"></div></div>${isUrgent?`<div class="class-urgent">⚡ Only ${c.capacity-c.enrolled} spots left!</div>`:''}${isFull?`<div class="class-urgent" style="background:rgba(239,68,68,0.2);color:#ef4444">CLASS FULL</div>`:''}</div></div>`;
+  }).join('');
+  document.querySelectorAll('#classesGrid .reveal').forEach(el => observer.observe(el));
+}
+
+document.getElementById('trialForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  const success = document.getElementById('formSuccess');
+  const error = document.getElementById('formError');
+  const formData = new FormData(e.target);
+  btn.disabled = true;
+  btn.textContent = 'Booking...';
+  error.classList.remove('show');
+  try {
+    const payload = {
+      gym_id: window.GYM_CONFIG.gym_id,
+      name: formData.get('name'),
+      phone: formData.get('phone'),
+      email: formData.get('email') || '',
+      fitness_goal: formData.get('goal'),
+      preferred_visit_period: formData.get('preferred_time'),
+      source: 'website_trial',
+      interest: 'free_trial',
+      consent_status: 'granted',
+      consent_version: '1.0',
+      consent_timestamp: new Date().toISOString()
+    };
+    const res = await fetch(`${window.GYM_CONFIG.apiBase}/createLeadWithConsent`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (data.success) {
+      btn.style.display = 'none';
+      success.classList.add('show');
+      e.target.querySelectorAll('input, select, button').forEach(el => el.style.display = 'none');
+      success.style.display = 'block';
+    } else {
+      throw new Error(data.error || 'Something went wrong');
+    }
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Book My Free Trial →';
+    error.textContent = err.message || 'Network error. Please try again or WhatsApp us directly.';
+    error.classList.add('show');
+  }
+});
+
+loadClasses();
+</script>
+</body>
+</html>
