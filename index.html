@@ -474,10 +474,30 @@ document.getElementById('trialForm').addEventListener('submit', async (e) => {
       throw new Error(data.error || 'Something went wrong');
     }
   } catch (err) {
-    btn.disabled = false;
-    btn.textContent = 'Book My Free Trial →';
-    error.textContent = err.message || 'Network error. Please try again or WhatsApp us directly.';
-    error.classList.add('show');
+    // API unavailable — never lose the lead: queue locally, confirm, offer WhatsApp
+    try {
+      const queue = JSON.parse(localStorage.getItem('gymos_lead_queue') || '[]');
+      queue.push({
+        gym_name: 'PowerHouse Fitness',
+        name: formData.get('name'),
+        phone: formData.get('phone'),
+        email: formData.get('email') || '',
+        interest: 'Free trial',
+        queued_at: new Date().toISOString()
+      });
+      localStorage.setItem('gymos_lead_queue', JSON.stringify(queue));
+    } catch (qErr) {}
+    btn.style.display = 'none';
+    e.target.querySelectorAll('input, select, button').forEach(el => el.style.display = 'none');
+    success.style.display = 'block';
+    success.classList.add('show');
+    const waBtn = document.createElement('a');
+    waBtn.href = `https://wa.me/${window.GYM_CONFIG.whatsapp}?text=` + encodeURIComponent('Hi PowerHouse Fitness! I just booked a free trial. Name: ' + formData.get('name'));
+    waBtn.target = '_blank';
+    waBtn.rel = 'noopener';
+    waBtn.style.cssText = 'display:inline-block;margin-top:14px;padding:12px 24px;background:#25D366;color:#fff;border-radius:10px;font-weight:600;text-decoration:none';
+    waBtn.textContent = 'Chat on WhatsApp now →';
+    success.appendChild(waBtn);
   }
 });
 
